@@ -25,6 +25,22 @@ class Tree {
         myhtml_tree_destroy(raw)
     }
     
+    var htmlNode: Node? {
+        guard let rawNode = myhtml_tree_get_node_html(raw) else { return nil }
+        return Node(raw: rawNode)
+    }
+    
+    var headNode: Node? {
+        guard let rawNode = myhtml_tree_get_node_head(raw) else { return nil }
+        return Node(raw: rawNode)
+    }
+    
+    var bodyNode: Node? {
+        guard let rawNode = myhtml_tree_get_node_body(raw) else { return nil }
+        return Node(raw: rawNode)
+    }
+    
+    
     func nodesWithName(name: String) throws -> NodeCollection {
         let rawPtr = name.withCString { cStr in
             myhtml_get_nodes_by_name(raw, nil, cStr, name.utf8.count, nil)
