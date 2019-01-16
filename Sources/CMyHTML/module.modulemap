@@ -1,0 +1,5 @@
+module CMyHTML [system] {
+    umbrella header "shim.h"
+    link "myhtml"
+    export *
+}
