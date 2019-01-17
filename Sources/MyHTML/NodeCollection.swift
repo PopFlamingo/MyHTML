@@ -34,10 +34,8 @@ class NodeCollection: Collection {
     }
     
     subscript(position: Int) -> Node {
-        guard let raw = self.raw else {
-            fatalError("Empty collection")
-        }
-        guard position >= startIndex && position < endIndex else {
+        guard let raw = self.raw,
+            position >= startIndex && position < endIndex else {
             fatalError("Out of bound access")
         }
         return Node(raw: raw.pointee.list[position]!)
