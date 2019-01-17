@@ -58,11 +58,12 @@ class Tree {
     
     func getChildNodesWhere(attribute: String,
                             contains value: String,
-                            caseInsensitive: Bool) -> NodeCollection {
+                            caseInsensitive: Bool,
+                            scopeNode: Node? = nil) -> NodeCollection {
         let rawCollection = attribute.withCString { attributeCStr in
             value.withCString { valueCStr in
                 myhtml_get_nodes_by_attribute_value_contain(
-                    raw,nil, nil, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
+                    raw,nil, scopeNode?.raw, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
             }
         }
         return NodeCollection(raw: rawCollection!)
@@ -70,11 +71,12 @@ class Tree {
     
     func getChildNodesWhere(attribute: String,
                             beginsWith value: String,
-                            caseInsensitive: Bool) -> NodeCollection {
+                            caseInsensitive: Bool,
+                            scopeNode: Node? = nil) -> NodeCollection {
         let rawCollection = attribute.withCString { attributeCStr in
             value.withCString { valueCStr in
                 myhtml_get_nodes_by_attribute_value_begin(
-                    raw,nil, nil, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
+                    raw,nil, scopeNode?.raw, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
             }
         }
         return NodeCollection(raw: rawCollection!)
@@ -82,11 +84,12 @@ class Tree {
     
     func getChildNodesWhere(attribute: String,
                             endWith value: String,
-                            caseInsensitive: Bool) -> NodeCollection {
+                            caseInsensitive: Bool,
+                            scopeNode: Node? = nil) -> NodeCollection {
         let rawCollection = attribute.withCString { attributeCStr in
             value.withCString { valueCStr in
                 myhtml_get_nodes_by_attribute_value_end(
-                    raw,nil, nil, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
+                    raw,nil, scopeNode?.raw, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
             }
         }
         return NodeCollection(raw: rawCollection!)
