@@ -48,26 +48,50 @@ class Tree {
         return NodeCollection(raw: rawPtr!)
     }
     
-    func nodesWhere(key: String, contains: String, caseInsensitive: Bool) -> NodeCollection {
-        let rawCollection = key.withCString { keyCStr in
-            return contains.withCString { value in
-                return myhtml_get_nodes_by_attribute_value_whitespace_separated(
-                    raw,
-                    nil,
-                    nil,
-                    caseInsensitive,
-                    keyCStr,
-                    key.utf8.count,
-                    value,
-                    contains.utf8.count,
-                    nil
-                )
+    func getChildNodesContaining(attribute: String) throws -> NodeCollection {
+        let rawPtr = attribute.withCString { cStr in
+            myhtml_get_nodes_by_attribute_key(raw, nil, nil, cStr, attribute.utf8.count, nil)
+        }
+        return NodeCollection(raw: rawPtr!)
+    }
+
+    
+    func getChildNodesWhere(attribute: String,
+                            contains value: String,
+                            caseInsensitive: Bool) -> NodeCollection {
+        let rawCollection = attribute.withCString { attributeCStr in
+            value.withCString { valueCStr in
+                myhtml_get_nodes_by_attribute_value_contain(
+                    raw,nil, nil, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
             }
-            
         }
         return NodeCollection(raw: rawCollection!)
-
     }
+    
+    func getChildNodesWhere(attribute: String,
+                            beginsWith value: String,
+                            caseInsensitive: Bool) -> NodeCollection {
+        let rawCollection = attribute.withCString { attributeCStr in
+            value.withCString { valueCStr in
+                myhtml_get_nodes_by_attribute_value_begin(
+                    raw,nil, nil, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
+            }
+        }
+        return NodeCollection(raw: rawCollection!)
+    }
+    
+    func getChildNodesWhere(attribute: String,
+                            endWith value: String,
+                            caseInsensitive: Bool) -> NodeCollection {
+        let rawCollection = attribute.withCString { attributeCStr in
+            value.withCString { valueCStr in
+                myhtml_get_nodes_by_attribute_value_end(
+                    raw,nil, nil, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
+            }
+        }
+        return NodeCollection(raw: rawCollection!)
+    }
+    
 
     
 }

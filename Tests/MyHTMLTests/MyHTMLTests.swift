@@ -30,7 +30,7 @@ final class MyHTMLTests: XCTestCase {
                 }
             }
             
-            print(tree.nodesWhere(key: "class", contains: "foo bar", caseInsensitive: false).count)
+            print(tree.nodesWhere(attribute: "class", contains: "foo bar", caseInsensitive: false).count)
             
             
         } catch {
