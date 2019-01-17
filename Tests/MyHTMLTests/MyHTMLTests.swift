@@ -68,9 +68,22 @@ final class MyHTMLTests: XCTestCase {
         XCTAssertEqual(tree.nodesWithName(name: "P").count, 3)
         XCTAssertEqual(tree.nodesWithName(name: "bar").count, 0)
     }
+    
+    func testGetNodeTextContent() throws {
+        let tree = try Tree(context: myHTML, html: sampleCodeA)
+        XCTAssertEqual(Array(tree.nodesWithName(name: "title").first!.children).first?.textContent, "Foo")
+        XCTAssertEqual(Array(tree.nodesWithName(name: "p")[1].children).first?.textContent, "Cools")
+        XCTAssertEqual(Array(tree.nodesWithName(name: "p")[2].children).first?.textContent, nil)
+    }
 
     static var allTests = [
         ("testAttributeContainsValue", testAttributeContainsValue),
+        ("testContainsAttribute", testContainsAttribute),
+        ("testAttributeStartsWith", testAttributeStartsWith),
+        ("testAttributeEndsWith", testAttributeEndsWith),
+        ("testCompareCaseSensitivity", testCompareCaseSensitivity),
+        ("testGetNodeByName", testGetNodeByName),
+        ("testGetNodeTextContent", testGetNodeTextContent)
     ]
     
     let sampleCodeA = """
