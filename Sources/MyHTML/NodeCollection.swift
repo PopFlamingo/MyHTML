@@ -9,18 +9,24 @@ import CMyHTML
 
 class NodeCollection: Collection {
     
-    var raw: UnsafeMutablePointer<myhtml_collection>
+    var raw: UnsafeMutablePointer<myhtml_collection>?
     
     init(raw: UnsafeMutablePointer<myhtml_collection>) {
         self.raw = raw
     }
+    
+    private init(raw: UnsafeMutablePointer<myhtml_collection>?) {
+        self.raw = raw
+    }
+    
+    static let empty = NodeCollection(raw: nil)
     
     deinit {
         myhtml_collection_destroy(raw)
     }
     
     var count: Int {
-        return raw.pointee.length
+        return raw?.pointee.length ?? 0
     }
     
     func index(after i: Int) -> Int {
@@ -28,13 +34,16 @@ class NodeCollection: Collection {
     }
     
     subscript(position: Int) -> Node {
+        guard let raw = self.raw else {
+            fatalError("Empty collection")
+        }
         return Node(raw: raw.pointee.list[position]!)
     }
     
     var startIndex: Int = 0
     
     var endIndex: Int {
-        return raw.pointee.length
+        return raw?.pointee.length ?? 0
     }
     
     

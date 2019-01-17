@@ -41,18 +41,27 @@ class Tree {
     }
     
     
-    func nodesWithName(name: String) throws -> NodeCollection {
+    func nodesWithName(name: String) -> NodeCollection {
         let rawPtr = name.withCString { cStr in
             myhtml_get_nodes_by_name(raw, nil, cStr, name.utf8.count, nil)
         }
-        return NodeCollection(raw: rawPtr!)
+        if let rawPtr = rawPtr {
+            return NodeCollection(raw: rawPtr)
+        } else {
+            return NodeCollection.empty
+        }
+        
     }
     
-    func getChildNodesContaining(attribute: String) throws -> NodeCollection {
+    func getChildNodesContaining(attribute: String) -> NodeCollection {
         let rawPtr = attribute.withCString { cStr in
             myhtml_get_nodes_by_attribute_key(raw, nil, nil, cStr, attribute.utf8.count, nil)
         }
-        return NodeCollection(raw: rawPtr!)
+        if let rawPtr = rawPtr {
+            return NodeCollection(raw: rawPtr)
+        } else {
+            return NodeCollection.empty
+        }
     }
 
     
@@ -66,7 +75,11 @@ class Tree {
                     raw,nil, scopeNode?.raw, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
             }
         }
-        return NodeCollection(raw: rawCollection!)
+        if let rawCollection = rawCollection {
+            return NodeCollection(raw: rawCollection)
+        } else {
+            return NodeCollection.empty
+        }
     }
     
     func getChildNodesWhere(attribute: String,
@@ -79,11 +92,15 @@ class Tree {
                     raw,nil, scopeNode?.raw, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
             }
         }
-        return NodeCollection(raw: rawCollection!)
+        if let rawCollection = rawCollection {
+            return NodeCollection(raw: rawCollection)
+        } else {
+            return NodeCollection.empty
+        }
     }
     
     func getChildNodesWhere(attribute: String,
-                            endWith value: String,
+                            endsWith value: String,
                             caseInsensitive: Bool,
                             scopeNode: Node? = nil) -> NodeCollection {
         let rawCollection = attribute.withCString { attributeCStr in
@@ -92,7 +109,11 @@ class Tree {
                     raw,nil, scopeNode?.raw, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
             }
         }
-        return NodeCollection(raw: rawCollection!)
+        if let rawCollection = rawCollection {
+            return NodeCollection(raw: rawCollection)
+        } else {
+            return NodeCollection.empty
+        }
     }
     
 
