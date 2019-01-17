@@ -19,5 +19,5 @@ jobs:
             pkg-config --cflags --libs myhtml
       - run: 
           name: Test code
-          command: swift test
+          command: pkg-config --cflags --libs myhtml; swift test
      
