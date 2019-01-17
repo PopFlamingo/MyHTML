@@ -15,6 +15,7 @@ jobs:
             make prefix="" && make test && make install prefix=""
             mkdir /usr/local/lib/pkgconfig/
             cp myhtml.pc /usr/local/lib/pkgconfig/
+            cat myhtml.pc
       - run: 
           name: Test code
           command: swift test
