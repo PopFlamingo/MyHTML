@@ -12,7 +12,7 @@ jobs:
             git clone https://github.com/lexborisov/myhtml.git;
             cd myhtml
             git checkout 18d5d82
-            make; make test
+            make && make test && make install
       - run: 
           name: Test code
           command: swift test
