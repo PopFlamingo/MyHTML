@@ -10,6 +10,7 @@ jobs:
           name: Install Chromium
           command: |
             git clone https://github.com/lexborisov/myhtml.git;
+            ls
             cd mythml
             git checkout 18d5d82
             make; make test
