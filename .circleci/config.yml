@@ -13,6 +13,7 @@ jobs:
             cd myhtml
             git checkout 18d5d82
             make && make test && make install
+            mkdir /usr/local/lib/pkgconfig/
             cp myhtml.pc /usr/local/lib/pkgconfig/
       - run: 
           name: Test code
