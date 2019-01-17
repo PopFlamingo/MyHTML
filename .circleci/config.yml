@@ -16,6 +16,7 @@ jobs:
             mkdir /usr/local/lib/pkgconfig/
             cp myhtml.pc /usr/local/lib/pkgconfig/
             cat myhtml.pc
+            pkg-config --cflags --libs myhtml
       - run: 
           name: Test code
           command: swift test
