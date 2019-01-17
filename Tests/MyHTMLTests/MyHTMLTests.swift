@@ -63,26 +63,26 @@ final class MyHTMLTests: XCTestCase {
     
     func testGetNodeByName() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
-        XCTAssertEqual(tree.nodesWithName(name: "head").count, 1)
-        XCTAssertEqual(tree.nodesWithName(name: "p").count, 3)
-        XCTAssertEqual(tree.nodesWithName(name: "P").count, 3)
-        XCTAssertEqual(tree.nodesWithName(name: "bar").count, 0)
+        XCTAssertEqual(tree.getChildNodes(named: "head").count, 1)
+        XCTAssertEqual(tree.getChildNodes(named: "p").count, 3)
+        XCTAssertEqual(tree.getChildNodes(named: "P").count, 3)
+        XCTAssertEqual(tree.getChildNodes(named: "bar").count, 0)
     }
     
     func testGetNodeTextContent() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
-        XCTAssertEqual(Array(tree.nodesWithName(name: "title").first!.children).first?.textContent, "Foo")
-        XCTAssertEqual(Array(tree.nodesWithName(name: "p")[1].children).first?.textContent, "Cools")
-        XCTAssertEqual(Array(tree.nodesWithName(name: "p")[2].children).first?.textContent, nil)
+        XCTAssertEqual(Array(tree.getChildNodes(named: "title").first!.children).first?.textContent, "Foo")
+        XCTAssertEqual(Array(tree.getChildNodes(named: "p")[1].children).first?.textContent, "Cools")
+        XCTAssertEqual(Array(tree.getChildNodes(named: "p")[2].children).first?.textContent, nil)
     }
     
     func testNodeIdentity() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
-        let head1 = tree.nodesWithName(name: "head")[0]
-        let head2 = tree.nodesWithName(name: "head")[0]
+        let head1 = tree.getChildNodes(named: "head")[0]
+        let head2 = tree.getChildNodes(named: "head")[0]
         XCTAssertTrue(head1._isSameNode(as: head2))
         
-        let divs = tree.nodesWithName(name: "div")
+        let divs = tree.getChildNodes(named: "div")
         XCTAssertFalse(divs[0]._isSameNode(as: divs[1]))
     }
 

@@ -41,7 +41,7 @@ class Tree {
     }
     
     
-    func nodesWithName(name: String) -> NodeCollection {
+    func getChildNodes(named name: String) -> NodeCollection {
         let rawPtr = name.withCString { cStr in
             myhtml_get_nodes_by_name(raw, nil, cStr, name.utf8.count, nil)
         }
