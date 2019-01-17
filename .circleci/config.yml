@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Chromium
+          name: Install MyHTML C lib
           command: |
             git clone https://github.com/lexborisov/myhtml.git;
             cd myhtml
