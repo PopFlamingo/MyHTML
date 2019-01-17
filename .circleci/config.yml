@@ -1,0 +1,21 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: swift
+    steps:
+      - checkout
+      - run:
+          name: Install MyHTML C lib
+          command: |
+            git clone https://github.com/lexborisov/myhtml.git;
+            cd myhtml
+            git checkout 18d5d82
+            make prefix="/usr" && make test && make install prefix="/usr"
+            mkdir /usr/local/lib/pkgconfig/
+            cp myhtml.pc /usr/local/lib/pkgconfig/
+      - run: 
+          name: Test code
+          command: pkg-config --cflags --libs myhtml; swift test
+     
