@@ -12,7 +12,7 @@ jobs:
             git clone https://github.com/lexborisov/myhtml.git;
             cd myhtml
             git checkout 18d5d82
-            make prefix="" && make test && make install prefix=""
+            make prefix="/usr" && make test && make install prefix="/usr"
             mkdir /usr/local/lib/pkgconfig/
             cp myhtml.pc /usr/local/lib/pkgconfig/
             cat myhtml.pc
