@@ -80,10 +80,10 @@ final class MyHTMLTests: XCTestCase {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
         let head1 = tree.getChildNodes(named: "head")[0]
         let head2 = tree.getChildNodes(named: "head")[0]
-        XCTAssertTrue(head1._isSameNode(as: head2))
+        XCTAssertTrue(head1.isSameNode(as: head2))
         
         let divs = tree.getChildNodes(named: "div")
-        XCTAssertFalse(divs[0]._isSameNode(as: divs[1]))
+        XCTAssertFalse(divs[0].isSameNode(as: divs[1]))
     }
 
     static var allTests = [

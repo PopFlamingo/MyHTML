@@ -53,8 +53,7 @@ class Node {
         return myhtml_node_tag_id(raw)
     }
     
-    /// Do not use in production
-    func _isSameNode(as other: Node) -> Bool {
+    func isSameNode(as other: Node) -> Bool {
         return self.raw == other.raw
     }
     
