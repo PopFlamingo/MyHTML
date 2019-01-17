@@ -53,8 +53,8 @@ class Node {
         return myhtml_node_tag_id(raw)
     }
     
-    func isSameNode(as other: Node) -> Bool {
-        return self.id == other.id && self.namespace == other.namespace 
+    func _isSameNode(as other: Node) -> Bool {
+        return self.raw == other.raw
     }
     
     

@@ -75,6 +75,16 @@ final class MyHTMLTests: XCTestCase {
         XCTAssertEqual(Array(tree.nodesWithName(name: "p")[1].children).first?.textContent, "Cools")
         XCTAssertEqual(Array(tree.nodesWithName(name: "p")[2].children).first?.textContent, nil)
     }
+    
+    func testNodeIdentity() throws {
+        let tree = try Tree(context: myHTML, html: sampleCodeA)
+        let head1 = tree.nodesWithName(name: "head")[0]
+        let head2 = tree.nodesWithName(name: "head")[0]
+        XCTAssertTrue(head1._isSameNode(as: head2))
+        
+        let divs = tree.nodesWithName(name: "div")
+        XCTAssertFalse(divs[0]._isSameNode(as: divs[1]))
+    }
 
     static var allTests = [
         ("testAttributeContainsValue", testAttributeContainsValue),
@@ -97,6 +107,8 @@ final class MyHTMLTests: XCTestCase {
             <p class="foo bar">Hey</p>
             <p>Cools</p>
             <p></p>
+            <div></div>
+            <div></div>
         </body>
     </html>
     """
