@@ -15,8 +15,6 @@ jobs:
             make prefix="/usr" && make test && make install prefix="/usr"
             mkdir /usr/local/lib/pkgconfig/
             cp myhtml.pc /usr/local/lib/pkgconfig/
-            cat myhtml.pc
-            pkg-config --cflags --libs myhtml
       - run: 
           name: Test code
           command: pkg-config --cflags --libs myhtml; swift test
