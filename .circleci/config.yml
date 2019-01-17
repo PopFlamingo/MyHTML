@@ -8,10 +8,11 @@ jobs:
       - checkout
       - run:
           name: Install Chromium
-          command: git clone https://github.com/lexborisov/myhtml.git; \
-          cd mythml; \
-          git checkout 18d5d82; \
-          make; make test;
+          command: |
+            git clone https://github.com/lexborisov/myhtml.git;
+            cd mythml
+            git checkout 18d5d82
+            make; make test
       - run: 
           name: Test code
           command: swift test
