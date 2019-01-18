@@ -1,15 +1,15 @@
 import CMyHTML
 
-struct NodeSequence: Sequence, IteratorProtocol {
+public struct NodeSequence: Sequence, IteratorProtocol {
     var current: Node?
     
     init(current: Node?) {
         self.current = current
     }
     
-    typealias Element = Node
-    typealias Iterator = NodeSequence
-    mutating func next() -> Node? {
+    public typealias Element = Node
+    public typealias Iterator = NodeSequence
+    public mutating func next() -> Node? {
         if let current = current {
             defer {
                 if let rawNext = myhtml_node_next(current.raw) {

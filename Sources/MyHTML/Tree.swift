@@ -1,8 +1,8 @@
 import CMyHTML
 
-class Tree {
+public class Tree {
     var raw: OpaquePointer
-    init(context: MyHTML, html: String) throws {
+    public init(context: MyHTML, html: String) throws {
         guard let raw = myhtml_tree_create() else {
             throw Error.cannotCreateBaseStructure
         }
@@ -25,23 +25,23 @@ class Tree {
         myhtml_tree_destroy(raw)
     }
     
-    var htmlNode: Node? {
+    public var htmlNode: Node? {
         guard let rawNode = myhtml_tree_get_node_html(raw) else { return nil }
         return Node(raw: rawNode)
     }
     
-    var headNode: Node? {
+    public var headNode: Node? {
         guard let rawNode = myhtml_tree_get_node_head(raw) else { return nil }
         return Node(raw: rawNode)
     }
     
-    var bodyNode: Node? {
+    public var bodyNode: Node? {
         guard let rawNode = myhtml_tree_get_node_body(raw) else { return nil }
         return Node(raw: rawNode)
     }
     
     
-    func getChildNodes(named name: String) -> NodeCollection {
+    public func getChildNodes(named name: String) -> NodeCollection {
         let rawPtr = name.withCString { cStr in
             myhtml_get_nodes_by_name(raw, nil, cStr, name.utf8.count, nil)
         }
@@ -53,7 +53,7 @@ class Tree {
         
     }
     
-    func getChildNodesContaining(attribute: String) -> NodeCollection {
+    public func getChildNodesContaining(attribute: String) -> NodeCollection {
         let rawPtr = attribute.withCString { cStr in
             myhtml_get_nodes_by_attribute_key(raw, nil, nil, cStr, attribute.utf8.count, nil)
         }
@@ -65,7 +65,7 @@ class Tree {
     }
 
     
-    func getChildNodesWhere(attribute: String,
+    public func getChildNodesWhere(attribute: String,
                             contains value: String,
                             caseInsensitive: Bool,
                             scopeNode: Node? = nil) -> NodeCollection {
@@ -82,7 +82,7 @@ class Tree {
         }
     }
     
-    func getChildNodesWhere(attribute: String,
+    public func getChildNodesWhere(attribute: String,
                             beginsWith value: String,
                             caseInsensitive: Bool,
                             scopeNode: Node? = nil) -> NodeCollection {
@@ -99,7 +99,7 @@ class Tree {
         }
     }
     
-    func getChildNodesWhere(attribute: String,
+    public func getChildNodesWhere(attribute: String,
                             endsWith value: String,
                             caseInsensitive: Bool,
                             scopeNode: Node? = nil) -> NodeCollection {

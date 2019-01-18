@@ -7,24 +7,24 @@
 
 import CMyHTML
 
-class Node {
+public class Node {
     var raw: OpaquePointer
     init(raw: OpaquePointer) {
         self.raw = raw
     }
     
-    var textContent: String? {
+    public var textContent: String? {
         guard let rawText = myhtml_node_text(raw, nil) else {
             return nil
         }
         return String(cString: rawText)
     }
     
-    var tagId: Int {
+    public var tagId: Int {
         return myhtml_node_tag_id(raw)
     }
     
-    var children: NodeSequence {
+    public var children: NodeSequence {
         if let rawChild = myhtml_node_child(raw) {
             return NodeSequence(current: Node(raw: rawChild))
         } else {

@@ -1,10 +1,10 @@
 import CMyHTML
 
-class MyHTML {
+public class MyHTML {
     
     var raw: OpaquePointer
     
-    init(options: Options,
+    public init(options: Options,
          threadCount: Int,
          queueSize: Int = 4096) throws {
         guard let raw = myhtml_create() else {
@@ -26,8 +26,8 @@ class MyHTML {
     }
     
 
-    enum Options: RawRepresentable {
-        init?(rawValue: UInt32) {
+    public enum Options: RawRepresentable {
+        public init?(rawValue: UInt32) {
             switch rawValue {
             case MyHTML_OPTIONS_PARSE_MODE_SEPARATELY.rawValue:
                 self = .separately
@@ -42,7 +42,7 @@ class MyHTML {
             }
         }
         
-        var rawValue: UInt32 {
+        public var rawValue: UInt32 {
             switch self {
             case .separately:
                 return MyHTML_OPTIONS_PARSE_MODE_SEPARATELY.rawValue

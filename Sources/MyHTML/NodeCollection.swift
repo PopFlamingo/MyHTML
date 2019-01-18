@@ -7,7 +7,7 @@
 
 import CMyHTML
 
-class NodeCollection: Collection {
+public class NodeCollection: Collection {
     
     var raw: UnsafeMutablePointer<myhtml_collection>?
     
@@ -25,15 +25,15 @@ class NodeCollection: Collection {
         myhtml_collection_destroy(raw)
     }
     
-    var count: Int {
+    public var count: Int {
         return raw?.pointee.length ?? 0
     }
     
-    func index(after i: Int) -> Int {
+    public func index(after i: Int) -> Int {
         return i+1
     }
     
-    subscript(position: Int) -> Node {
+    public subscript(position: Int) -> Node {
         guard let raw = self.raw,
             position >= startIndex && position < endIndex else {
             fatalError("Out of bound access")
@@ -41,15 +41,15 @@ class NodeCollection: Collection {
         return Node(raw: raw.pointee.list[position]!)
     }
     
-    var startIndex: Int = 0
+    public var startIndex: Int = 0
     
-    var endIndex: Int {
+    public var endIndex: Int {
         return raw?.pointee.length ?? 0
     }
     
     
     
-    typealias Element = Node
-    typealias Index = Int
+    public typealias Element = Node
+    public typealias Index = Int
     
 }
