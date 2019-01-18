@@ -85,6 +85,16 @@ final class MyHTMLTests: XCTestCase {
         let divs = tree.getChildNodes(named: "div")
         XCTAssertFalse(divs[0].isSameNode(as: divs[1]))
     }
+    
+    func testAttributesCount() throws {
+        let tree = try Tree(context: myHTML, html: sampleCodeA)
+        let paragraphs = tree.getChildNodes(named: "p")
+        XCTAssertEqual(paragraphs[0].attributes.count, 1)
+        
+       
+        let divs = tree.getChildNodes(named: "div")
+        XCTAssertEqual(divs[1].attributes.count, 2)
+    }
 
     static var allTests = [
         ("testAttributeContainsValue", testAttributeContainsValue),
@@ -93,7 +103,9 @@ final class MyHTMLTests: XCTestCase {
         ("testAttributeEndsWith", testAttributeEndsWith),
         ("testCompareCaseSensitivity", testCompareCaseSensitivity),
         ("testGetNodeByName", testGetNodeByName),
-        ("testGetNodeTextContent", testGetNodeTextContent)
+        ("testGetNodeTextContent", testGetNodeTextContent),
+        ("testNodeIdentity", testNodeIdentity),
+        ("testAttributesCount", testAttributesCount)
     ]
     
     let sampleCodeA = """
@@ -108,7 +120,7 @@ final class MyHTMLTests: XCTestCase {
             <p>Cools</p>
             <p></p>
             <div></div>
-            <div></div>
+            <div id="hey" class="amazing"></div>
         </body>
     </html>
     """
