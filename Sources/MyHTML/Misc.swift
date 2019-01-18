@@ -5,7 +5,7 @@ public enum Error: Swift.Error {
     case statusError(rawValue: UInt32)
 }
 
-public extension myhtml_namespace_t: Equatable {
+extension myhtml_namespace_t: Equatable {
     public static func ==(lhs: myhtml_namespace_t, rhs: myhtml_namespace_t) -> Bool {
         return lhs.rawValue == rhs.rawValue
     }
