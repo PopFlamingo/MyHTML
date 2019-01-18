@@ -24,7 +24,15 @@ public class Node {
         return myhtml_node_tag_id(raw)
     }
     
-    public var children: NodeSequence {
+    public var children: Array<Node> {
+        if let rawChild = myhtml_node_child(raw) {
+            return Array(NodeSequence(current: Node(raw: rawChild)))
+        } else {
+            return []
+        }
+    }
+    
+    public var childrenSequence: NodeSequence {
         if let rawChild = myhtml_node_child(raw) {
             return NodeSequence(current: Node(raw: rawChild))
         } else {
@@ -57,5 +65,12 @@ public class Node {
         return self.raw == other.raw
     }
     
+    func valueOf(attribute: String) -> String? {
+        return attribute.withCString { cStr -> (String?) in
+            guard let attr = myhtml_attribute_by_key(raw, cStr, attribute.utf8.count) else { return nil }
+            guard let rawStr = myhtml_attribute_value(attr, nil) else { return nil }
+            return String(cString: rawStr)
+        }
+    }
     
 }
