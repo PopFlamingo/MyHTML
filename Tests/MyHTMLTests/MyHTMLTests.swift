@@ -13,7 +13,6 @@ final class MyHTMLTests: XCTestCase {
     override func tearDown() {
         self.myHTML = nil
     }
-
     
     func testAttributeContainsValue() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
@@ -33,7 +32,6 @@ final class MyHTMLTests: XCTestCase {
         XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", beginsWith: "foo", caseInsensitive: false).count, 1)
         XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", beginsWith: "bar", caseInsensitive: false).count, 0)
     }
-    
     
     func testAttributeEndsWith() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
