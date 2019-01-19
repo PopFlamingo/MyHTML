@@ -90,10 +90,16 @@ final class MyHTMLTests: XCTestCase {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
         let paragraphs = tree.getChildNodes(named: "p")
         XCTAssertEqual(paragraphs[0].attributes.count, 1)
-        
-       
         let divs = tree.getChildNodes(named: "div")
         XCTAssertEqual(divs[1].attributes.count, 2)
+    }
+    
+    func testAttributesValues() throws {
+        let tree = try Tree(context: myHTML, html: sampleCodeA)
+        XCTAssertEqual(tree.getChildNodes(named: "img")[0].attributes[0].value,
+                       "automn.jpg")
+        XCTAssertEqual(tree.getChildNodes(named: "img")[0].attributes[1].value,
+                       nil)
     }
 
     static var allTests = [
@@ -105,7 +111,8 @@ final class MyHTMLTests: XCTestCase {
         ("testGetNodeByName", testGetNodeByName),
         ("testGetNodeTextContent", testGetNodeTextContent),
         ("testNodeIdentity", testNodeIdentity),
-        ("testAttributesCount", testAttributesCount)
+        ("testAttributesCount", testAttributesCount),
+        ("testAttributesValues", testAttributesValues)
     ]
     
     let sampleCodeA = """
@@ -121,6 +128,7 @@ final class MyHTMLTests: XCTestCase {
             <p></p>
             <div></div>
             <div id="hey" class="amazing"></div>
+            <img src="automn.jpg" hidden>
         </body>
     </html>
     """
