@@ -133,8 +133,15 @@ final class MyHTMLTests: XCTestCase {
         name.withCString { cStr in
             XCTAssertNotNil(myhtml_get_nodes_by_attribute_key(rawTree, nil, nil, cStr, name.utf8.count, nil))
         }
-        
     }
+    /*
+    func testScopeNode() throws {
+        let tree = try Tree(context: myHTML, html: sampleCodeB)
+        let firstDiv = tree.children(whereAttribute: "id", contains: "firstDiv")[0]
+        XCTAssertEqual(tree.children(whereAttribute: "class", contains: "bar").count, 3)
+        XCTAssertEqual(tree.children(whereAttribute: "class", contains: "bar", scope: firstDiv).count, 2)
+    }
+    */
     static var allTests = [
         ("testAttributeContainsValue", testAttributeContainsValue),
         ("testContainsAttribute", testContainsAttribute),
@@ -147,7 +154,9 @@ final class MyHTMLTests: XCTestCase {
         ("testAttributesCount", testAttributesCount),
         ("testAttributesValues", testAttributesValues),
         ("testRightTimeContextDeinit", testRightTimeContextDeinit),
-        ("testNodeParentGetter", testNodeParentGetter)
+        ("testNodeParentGetter", testNodeParentGetter),
+        ("testRightTimeTreeDeinit", testRightTimeTreeDeinit),
+        // ("testScopeNode", testScopeNode)
     ]
     
     let sampleCodeA = """
@@ -163,6 +172,26 @@ final class MyHTMLTests: XCTestCase {
             <p></p>
             <div></div>
             <div id="hey" class="amazing"></div>
+            <img src="automn.jpg" hidden>
+        </body>
+    </html>
+    """
+    
+    let sampleCodeB = """
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Foo</title>
+            <meta charset="utf-8">
+        </head>
+        <body>
+            <div id="firstDiv">
+                <p class="foo bar">Hey</p>
+                <p class="baz bar">Cools</p>
+            </div>
+            <p></p>
+            <div></div>
+            <div id="hey" class="amazing bar"></div>
             <img src="automn.jpg" hidden>
         </body>
     </html>
