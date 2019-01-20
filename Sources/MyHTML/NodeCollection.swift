@@ -36,7 +36,7 @@ public class NodeCollection: Collection {
     public subscript(position: Int) -> Node {
         guard let raw = self.raw,
             position >= startIndex && position < endIndex else {
-            fatalError("Out of bound access")
+                fatalError("Out of bound access")
         }
         return Node(raw: raw.pointee.list[position]!)
     }

@@ -73,7 +73,7 @@ public class Tree {
             return NodeCollection.empty
         }
     }
-
+    
     
     public func getChildren(whereAttribute attribute: String,
                             contains value: String,
@@ -126,6 +126,6 @@ public class Tree {
         }
     }
     
-
+    
     
 }

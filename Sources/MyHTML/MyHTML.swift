@@ -5,8 +5,8 @@ public class MyHTML {
     var raw: OpaquePointer
     
     public init(options: Options,
-         threadCount: Int,
-         queueSize: Int = 4096) throws {
+                threadCount: Int,
+                queueSize: Int = 4096) throws {
         guard let raw = myhtml_create() else {
             throw Error.cannotCreateBaseStructure
         }
@@ -29,7 +29,7 @@ public class MyHTML {
         assert(myhtml_destroy(raw) == nil, "Unsuccessful destroy")
     }
     
-
+    
     public enum Options: RawRepresentable {
         public init?(rawValue: UInt32) {
             switch rawValue {
