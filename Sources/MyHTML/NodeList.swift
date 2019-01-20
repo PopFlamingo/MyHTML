@@ -14,7 +14,7 @@ public struct NodeSequence: Sequence, IteratorProtocol {
         if let current = current {
             defer {
                 if let rawNext = myhtml_node_next(current.rawNode) {
-                    self.current = Node(rawNode: rawNext)
+                    self.current = Node(rawNode: rawNext, tree: current.tree)
                 } else {
                     self.current = nil
                 }

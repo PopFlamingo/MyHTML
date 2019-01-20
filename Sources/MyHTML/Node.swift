@@ -9,11 +9,13 @@ import CMyHTML
 
 public class Node {
     
-    init(rawNode: OpaquePointer) {
+    init(rawNode: OpaquePointer, tree: Tree) {
         self.rawNode = rawNode
+        self.tree = tree
     }
     
     var rawNode: OpaquePointer
+    var tree: Tree
     
     public var text: String? {
         guard let rawText = myhtml_node_text(rawNode, nil) else {
@@ -36,7 +38,7 @@ public class Node {
     // less verbose code with a performance cost.
     public var childrenSequence: NodeSequence {
         if let rawChild = myhtml_node_child(rawNode) {
-            return NodeSequence(current: Node(rawNode: rawChild))
+            return NodeSequence(current: Node(rawNode: rawChild, tree: tree))
         } else {
             return NodeSequence(current: nil)
         }
@@ -60,7 +62,7 @@ public class Node {
     
     public var parent: Node? {
         if let rawParent = myhtml_node_parent(rawNode) {
-            return Node(rawNode: rawParent)
+            return Node(rawNode: rawParent, tree: tree)
         } else {
             return nil
         }

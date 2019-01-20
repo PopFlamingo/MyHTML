@@ -10,16 +10,19 @@ import CMyHTML
 public class NodeCollection: Collection {
     
     var rawCollection: UnsafeMutablePointer<myhtml_collection>?
+    var tree: Tree!
     
-    init(rawCollection: UnsafeMutablePointer<myhtml_collection>) {
+    init(rawCollection: UnsafeMutablePointer<myhtml_collection>, tree: Tree?) {
         self.rawCollection = rawCollection
+        self.tree = tree
     }
     
-    private init(raw: UnsafeMutablePointer<myhtml_collection>?) {
+    private init(raw: UnsafeMutablePointer<myhtml_collection>?, tree: Tree?) {
         self.rawCollection = raw
+        self.tree = tree
     }
     
-    static let empty = NodeCollection(raw: nil)
+    static let empty = NodeCollection(raw: nil, tree: nil)
     
     deinit {
         assert(myhtml_collection_destroy(rawCollection) == nil, "Unsuccessful destroy")
@@ -38,7 +41,7 @@ public class NodeCollection: Collection {
             position >= startIndex && position < endIndex else {
                 fatalError("Out of bound access")
         }
-        return Node(rawNode: raw.pointee.list[position]!)
+        return Node(rawNode: raw.pointee.list[position]!, tree: tree)
     }
     
     public var startIndex: Int = 0

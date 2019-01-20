@@ -37,17 +37,17 @@ public class Tree {
     
     public var htmlNode: Node? {
         guard let rawNode = myhtml_tree_get_node_html(rawTree) else { return nil }
-        return Node(rawNode: rawNode)
+        return Node(rawNode: rawNode, tree: self)
     }
     
     public var headNode: Node? {
         guard let rawNode = myhtml_tree_get_node_head(rawTree) else { return nil }
-        return Node(rawNode: rawNode)
+        return Node(rawNode: rawNode, tree: self)
     }
     
     public var bodyNode: Node? {
         guard let rawNode = myhtml_tree_get_node_body(rawTree) else { return nil }
-        return Node(rawNode: rawNode)
+        return Node(rawNode: rawNode, tree: self)
     }
     
     
@@ -56,7 +56,7 @@ public class Tree {
             myhtml_get_nodes_by_name(rawTree, nil, cStr, name.utf8.count, nil)
         }
         if let rawPtr = rawPtr {
-            return NodeCollection(rawCollection: rawPtr)
+            return NodeCollection(rawCollection: rawPtr, tree: self)
         } else {
             return NodeCollection.empty
         }
@@ -68,7 +68,7 @@ public class Tree {
             myhtml_get_nodes_by_attribute_key(rawTree, nil, nil, cStr, attribute.utf8.count, nil)
         }
         if let rawPtr = rawPtr {
-            return NodeCollection(rawCollection: rawPtr)
+            return NodeCollection(rawCollection: rawPtr, tree: self)
         } else {
             return NodeCollection.empty
         }
@@ -86,7 +86,7 @@ public class Tree {
             }
         }
         if let rawCollection = rawCollection {
-            return NodeCollection(rawCollection: rawCollection)
+            return NodeCollection(rawCollection: rawCollection, tree: self)
         } else {
             return NodeCollection.empty
         }
@@ -103,7 +103,7 @@ public class Tree {
             }
         }
         if let rawCollection = rawCollection {
-            return NodeCollection(rawCollection: rawCollection)
+            return NodeCollection(rawCollection: rawCollection, tree: self)
         } else {
             return NodeCollection.empty
         }
@@ -120,7 +120,7 @@ public class Tree {
             }
         }
         if let rawCollection = rawCollection {
-            return NodeCollection(rawCollection: rawCollection)
+            return NodeCollection(rawCollection: rawCollection, tree: self)
         } else {
             return NodeCollection.empty
         }

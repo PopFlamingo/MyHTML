@@ -121,7 +121,20 @@ final class MyHTMLTests: XCTestCase {
         XCTAssertTrue(tree.children(named: "p")[0].parent!.isSameNode(as: tree.bodyNode!))
         XCTAssertNil(tree.htmlNode!.parent!.parent)
     }
-
+    
+    func testRightTimeTreeDeinit() throws {
+        let node: Node
+        do {
+            let tree = try Tree(context: myHTML, html: sampleCodeA)
+            node = tree.children(named: "p")[0]
+        }
+        let rawTree = myhtml_node_tree(node.rawNode)
+        let name = "id"
+        name.withCString { cStr in
+            XCTAssertNotNil(myhtml_get_nodes_by_attribute_key(rawTree, nil, nil, cStr, name.utf8.count, nil))
+        }
+        
+    }
     static var allTests = [
         ("testAttributeContainsValue", testAttributeContainsValue),
         ("testContainsAttribute", testContainsAttribute),
