@@ -2,7 +2,7 @@ import CMyHTML
 
 public class MyHTML {
     
-    var raw: OpaquePointer
+    var rawMyHTML: OpaquePointer
     
     public init(options: Options,
                 threadCount: Int,
@@ -10,7 +10,7 @@ public class MyHTML {
         guard let raw = myhtml_create() else {
             throw Error.cannotCreateBaseStructure
         }
-        self.raw = raw
+        self.rawMyHTML = raw
         
         
         let status = myhtml_init(raw, myhtml_options(rawValue: options.rawValue), threadCount, queueSize)
@@ -21,12 +21,12 @@ public class MyHTML {
         
     }
     
-    init(raw: OpaquePointer) {
-        self.raw = raw
+    init(rawMyHTML: OpaquePointer) {
+        self.rawMyHTML = rawMyHTML
     }
     
     deinit {
-        assert(myhtml_destroy(raw) == nil, "Unsuccessful destroy")
+        assert(myhtml_destroy(rawMyHTML) == nil, "Unsuccessful destroy")
     }
     
     

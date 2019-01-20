@@ -9,24 +9,24 @@ import CMyHTML
 
 public class NodeCollection: Collection {
     
-    var raw: UnsafeMutablePointer<myhtml_collection>?
+    var rawCollection: UnsafeMutablePointer<myhtml_collection>?
     
-    init(raw: UnsafeMutablePointer<myhtml_collection>) {
-        self.raw = raw
+    init(rawCollection: UnsafeMutablePointer<myhtml_collection>) {
+        self.rawCollection = rawCollection
     }
     
     private init(raw: UnsafeMutablePointer<myhtml_collection>?) {
-        self.raw = raw
+        self.rawCollection = raw
     }
     
     static let empty = NodeCollection(raw: nil)
     
     deinit {
-        assert(myhtml_collection_destroy(raw) == nil, "Unsuccessful destroy")
+        assert(myhtml_collection_destroy(rawCollection) == nil, "Unsuccessful destroy")
     }
     
     public var count: Int {
-        return raw?.pointee.length ?? 0
+        return rawCollection?.pointee.length ?? 0
     }
     
     public func index(after i: Int) -> Int {
@@ -34,17 +34,17 @@ public class NodeCollection: Collection {
     }
     
     public subscript(position: Int) -> Node {
-        guard let raw = self.raw,
+        guard let raw = self.rawCollection,
             position >= startIndex && position < endIndex else {
                 fatalError("Out of bound access")
         }
-        return Node(raw: raw.pointee.list[position]!)
+        return Node(rawNode: raw.pointee.list[position]!)
     }
     
     public var startIndex: Int = 0
     
     public var endIndex: Int {
-        return raw?.pointee.length ?? 0
+        return rawCollection?.pointee.length ?? 0
     }
     
     

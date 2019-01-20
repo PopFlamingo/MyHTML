@@ -8,20 +8,22 @@
 import CMyHTML
 
 public class Node {
-    var raw: OpaquePointer
-    init(raw: OpaquePointer) {
-        self.raw = raw
+    
+    init(rawNode: OpaquePointer) {
+        self.rawNode = rawNode
     }
     
+    var rawNode: OpaquePointer
+    
     public var text: String? {
-        guard let rawText = myhtml_node_text(raw, nil) else {
+        guard let rawText = myhtml_node_text(rawNode, nil) else {
             return nil
         }
         return String(cString: rawText)
     }
     
     public var tagId: Int {
-        return myhtml_node_tag_id(raw)
+        return myhtml_node_tag_id(rawNode)
     }
     
     public var children: [Node] {
@@ -33,8 +35,8 @@ public class Node {
     // if needed, otherwise, convenience array getters enable
     // less verbose code with a performance cost.
     public var childrenSequence: NodeSequence {
-        if let rawChild = myhtml_node_child(raw) {
-            return NodeSequence(current: Node(raw: rawChild))
+        if let rawChild = myhtml_node_child(rawNode) {
+            return NodeSequence(current: Node(rawNode: rawChild))
         } else {
             return NodeSequence(current: nil)
         }
@@ -49,7 +51,7 @@ public class Node {
     // if needed, otherwise, convenience array getters enable
     // less verbose code with a performance cost.
     public var attributesSequence: Attribute.Sequence {
-        if let rawAttribute = myhtml_node_attribute_first(raw) {
+        if let rawAttribute = myhtml_node_attribute_first(rawNode) {
             return Attribute.Sequence(current: Node.Attribute(raw: rawAttribute))
         } else {
             return Attribute.Sequence.empty
@@ -57,23 +59,23 @@ public class Node {
     }
     
     public var parent: Node? {
-        if let rawParent = myhtml_node_parent(raw) {
-            return Node(raw: rawParent)
+        if let rawParent = myhtml_node_parent(rawNode) {
+            return Node(rawNode: rawParent)
         } else {
             return nil
         }
     }
     
     var namespace: myhtml_namespace_t {
-        return myhtml_node_namespace(raw)
+        return myhtml_node_namespace(rawNode)
     }
     
     var id: Int {
-        return myhtml_node_tag_id(raw)
+        return myhtml_node_tag_id(rawNode)
     }
     
     public func isSameNode(as other: Node) -> Bool {
-        return self.raw == other.raw
+        return self.rawNode == other.rawNode
     }
     
     public class Attribute {

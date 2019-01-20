@@ -104,11 +104,11 @@ final class MyHTMLTests: XCTestCase {
     func testRightTimeContextDeinit() throws {
         func create() throws -> (Tree, OpaquePointer) {
             let fooHtml = try MyHTML(options: .single, threadCount: 1)
-            return try (Tree(context: fooHtml, html: sampleCodeA), fooHtml.raw)
+            return try (Tree(context: fooHtml, html: sampleCodeA), fooHtml.rawMyHTML)
         }
         
         let (tree, htmlPointer) = try create()
-        let htmlPointerThroughC: OpaquePointer? = myhtml_tree_get_myhtml(tree.raw)
+        let htmlPointerThroughC: OpaquePointer? = myhtml_tree_get_myhtml(tree.rawTree)
         XCTAssertNotNil(htmlPointerThroughC)
         XCTAssertEqual(htmlPointer, htmlPointerThroughC)
         let rawTree = myhtml_tree_create()
