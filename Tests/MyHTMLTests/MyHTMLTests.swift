@@ -115,6 +115,12 @@ final class MyHTMLTests: XCTestCase {
         myhtml_tree_init(rawTree, htmlPointerThroughC) // Should fail if early free
         myhtml_tree_destroy(rawTree)
     }
+    
+    func testNodeParentGetter() throws {
+        let tree = try Tree(context: myHTML, html: sampleCodeA)
+        XCTAssertTrue(tree.children(named: "p")[0].parent!.isSameNode(as: tree.bodyNode!))
+        XCTAssertNil(tree.htmlNode!.parent!.parent)
+    }
 
     static var allTests = [
         ("testAttributeContainsValue", testAttributeContainsValue),
@@ -127,7 +133,8 @@ final class MyHTMLTests: XCTestCase {
         ("testNodeIdentity", testNodeIdentity),
         ("testAttributesCount", testAttributesCount),
         ("testAttributesValues", testAttributesValues),
-        ("testRightTimeContextDeinit", testRightTimeContextDeinit)
+        ("testRightTimeContextDeinit", testRightTimeContextDeinit),
+        ("testNodeParentGetter", testNodeParentGetter)
     ]
     
     let sampleCodeA = """
