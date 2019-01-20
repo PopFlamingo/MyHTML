@@ -21,8 +21,12 @@ public class MyHTML {
         
     }
     
+    init(raw: OpaquePointer) {
+        self.raw = raw
+    }
+    
     deinit {
-        myhtml_destroy(raw)
+        assert(myhtml_destroy(raw) == nil, "Unsuccessful destroy")
     }
     
 

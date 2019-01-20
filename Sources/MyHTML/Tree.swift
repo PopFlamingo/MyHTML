@@ -1,12 +1,13 @@
 import CMyHTML
 
 public class Tree {
-    var raw: OpaquePointer
+    
     public init(context: MyHTML, html: String) throws {
         guard let raw = myhtml_tree_create() else {
             throw Error.cannotCreateBaseStructure
         }
         self.raw = raw
+        self.context = context
         let status = myhtml_tree_init(raw, context.raw)
         guard status == MyHTML_STATUS_OK.rawValue else {
             throw Error.statusError(rawValue: status)
@@ -22,8 +23,17 @@ public class Tree {
     }
     
     deinit {
-        myhtml_tree_destroy(raw)
+        assert(myhtml_tree_destroy(raw) == nil, "Unsuccessful destroy")
     }
+    
+    
+    var raw: OpaquePointer
+    
+    /// The context is a private variable that keeps MyHTML ref count > 0
+    /// as long as it is needed, this way, no early call to its C free
+    /// functions is done. Test `testRightTimeContextDeinit` attempts
+    /// to catch cases where this wouldn't be done correctly;
+    private var context: MyHTML
     
     public var htmlNode: Node? {
         guard let rawNode = myhtml_tree_get_node_html(raw) else { return nil }

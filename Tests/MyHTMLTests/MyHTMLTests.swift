@@ -99,6 +99,22 @@ final class MyHTMLTests: XCTestCase {
         XCTAssertEqual(tree.getChildNodes(named: "img")[0].attributes[1].value,
                        nil)
     }
+    
+    
+    func testRightTimeContextDeinit() throws {
+        func create() throws -> (Tree, OpaquePointer) {
+            let fooHtml = try MyHTML(options: .single, threadCount: 1)
+            return try (Tree(context: fooHtml, html: sampleCodeA), fooHtml.raw)
+        }
+        
+        let (tree, htmlPointer) = try create()
+        let htmlPointerThroughC: OpaquePointer? = myhtml_tree_get_myhtml(tree.raw)
+        XCTAssertNotNil(htmlPointerThroughC)
+        XCTAssertEqual(htmlPointer, htmlPointerThroughC)
+        let rawTree = myhtml_tree_create()
+        myhtml_tree_init(rawTree, htmlPointerThroughC) // Should fail if early free
+        myhtml_tree_destroy(rawTree)
+    }
 
     static var allTests = [
         ("testAttributeContainsValue", testAttributeContainsValue),
@@ -110,7 +126,8 @@ final class MyHTMLTests: XCTestCase {
         ("testGetNodeTextContent", testGetNodeTextContent),
         ("testNodeIdentity", testNodeIdentity),
         ("testAttributesCount", testAttributesCount),
-        ("testAttributesValues", testAttributesValues)
+        ("testAttributesValues", testAttributesValues),
+        ("testRightTimeContextDeinit", testRightTimeContextDeinit)
     ]
     
     let sampleCodeA = """
