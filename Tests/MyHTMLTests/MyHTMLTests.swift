@@ -24,6 +24,7 @@ final class MyHTMLTests: XCTestCase {
     func testContainsAttribute() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
         XCTAssertEqual(tree.children(containingAttribute: "charset").count, 1)
+        XCTAssertEqual(tree.children(containingAttribute: "charsetz").count, 0)
         XCTAssertEqual(tree.children(containingAttribute: "foo").count, 0)
     }
     
@@ -134,6 +135,7 @@ final class MyHTMLTests: XCTestCase {
             XCTAssertNotNil(myhtml_get_nodes_by_attribute_key(rawTree, nil, nil, cStr, name.utf8.count, nil))
         }
     }
+    
     /*
     func testScopeNode() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeB)
@@ -142,6 +144,12 @@ final class MyHTMLTests: XCTestCase {
         XCTAssertEqual(tree.children(whereAttribute: "class", contains: "bar", scope: firstDiv).count, 2)
     }
     */
+    
+    func testNodeId() throws {
+        let tree = try Tree(context: myHTML, html: sampleCodeA)
+        XCTAssertEqual(tree.htmlNode!.parent!.tagId, 0)
+    }
+    
     static var allTests = [
         ("testAttributeContainsValue", testAttributeContainsValue),
         ("testContainsAttribute", testContainsAttribute),
@@ -156,7 +164,8 @@ final class MyHTMLTests: XCTestCase {
         ("testRightTimeContextDeinit", testRightTimeContextDeinit),
         ("testNodeParentGetter", testNodeParentGetter),
         ("testRightTimeTreeDeinit", testRightTimeTreeDeinit),
-        // ("testScopeNode", testScopeNode)
+        // ("testScopeNode", testScopeNode),
+        ("testNodeId", testNodeId)
     ]
     
     let sampleCodeA = """

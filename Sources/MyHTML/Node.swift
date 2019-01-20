@@ -17,10 +17,6 @@ public class Node {
         return String(cString: rawText)
     }
     
-    public var tagId: Int {
-        return myhtml_node_tag_id(rawNode)
-    }
-    
     public var children: [Node] {
         return Array(childrenSequence)
     }
@@ -65,7 +61,7 @@ public class Node {
         return myhtml_node_namespace(rawNode)
     }
     
-    var id: Int {
+    public var tagId: Int {
         return myhtml_node_tag_id(rawNode)
     }
     
