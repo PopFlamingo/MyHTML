@@ -1,10 +1,3 @@
-//
-//  Node.swift
-//  MyHTML
-//
-//  Created by Trevör Anne Denise on 14/01/2019.
-//
-
 import CMyHTML
 
 public class Node {
