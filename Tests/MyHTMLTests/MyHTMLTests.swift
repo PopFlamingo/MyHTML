@@ -16,47 +16,47 @@ final class MyHTMLTests: XCTestCase {
     
     func testAttributeContainsValue() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", contains: "foo", caseInsensitive: false).count, 1)
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "charset", contains: "utf", caseInsensitive: false).count, 1)
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "foo", contains: "bar", caseInsensitive: false).count, 0)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "class", contains: "foo", caseInsensitive: false).count, 1)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "charset", contains: "utf", caseInsensitive: false).count, 1)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "foo", contains: "bar", caseInsensitive: false).count, 0)
     }
     
     func testContainsAttribute() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
-        XCTAssertEqual(tree.getChildNodesContaining(attribute: "charset").count, 1)
-        XCTAssertEqual(tree.getChildNodesContaining(attribute: "foo").count, 0)
+        XCTAssertEqual(tree.getChildren(containingAttribute: "charset").count, 1)
+        XCTAssertEqual(tree.getChildren(containingAttribute: "foo").count, 0)
     }
     
     func testAttributeStartsWith() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", beginsWith: "foo", caseInsensitive: false).count, 1)
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", beginsWith: "bar", caseInsensitive: false).count, 0)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "class", beginsWith: "foo", caseInsensitive: false).count, 1)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "class", beginsWith: "bar", caseInsensitive: false).count, 0)
     }
     
     func testAttributeEndsWith() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", endsWith: "foo", caseInsensitive: false).count, 0)
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", endsWith: "bar", caseInsensitive: false).count, 1)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "class", endsWith: "foo", caseInsensitive: false).count, 0)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "class", endsWith: "bar", caseInsensitive: false).count, 1)
     }
     
     func testCompareCaseSensitivity() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
         
         // Contains attribute
-        XCTAssertEqual(tree.getChildNodesContaining(attribute: "charset").count, 1)
-        XCTAssertEqual(tree.getChildNodesContaining(attribute: "CHaRSeT").count, 1)
+        XCTAssertEqual(tree.getChildren(containingAttribute: "charset").count, 1)
+        XCTAssertEqual(tree.getChildren(containingAttribute: "CHaRSeT").count, 1)
         
         // Contains
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", contains: "fOo", caseInsensitive: false).count, 0)
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", contains: "fOo", caseInsensitive: true).count, 1)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "class", contains: "fOo", caseInsensitive: false).count, 0)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "class", contains: "fOo", caseInsensitive: true).count, 1)
         
         // Begins
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", beginsWith: "Foo", caseInsensitive: false).count, 0)
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", beginsWith: "Foo", caseInsensitive: true).count, 1)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "class", beginsWith: "Foo", caseInsensitive: false).count, 0)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "class", beginsWith: "Foo", caseInsensitive: true).count, 1)
         
         // Ends
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", endsWith: "Bar", caseInsensitive: false).count, 0)
-        XCTAssertEqual(tree.getChildNodesWhere(attribute: "class", endsWith: "Bar", caseInsensitive: true).count, 1)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "class", endsWith: "Bar", caseInsensitive: false).count, 0)
+        XCTAssertEqual(tree.getChildren(whereAttribute: "class", endsWith: "Bar", caseInsensitive: true).count, 1)
     }
     
     func testGetNodeByName() throws {

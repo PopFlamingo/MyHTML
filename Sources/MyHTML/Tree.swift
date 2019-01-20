@@ -53,7 +53,7 @@ public class Tree {
         
     }
     
-    public func getChildNodesContaining(attribute: String) -> NodeCollection {
+    public func getChildren(containingAttribute attribute: String) -> NodeCollection {
         let rawPtr = attribute.withCString { cStr in
             myhtml_get_nodes_by_attribute_key(raw, nil, nil, cStr, attribute.utf8.count, nil)
         }
@@ -65,9 +65,9 @@ public class Tree {
     }
 
     
-    public func getChildNodesWhere(attribute: String,
+    public func getChildren(whereAttribute attribute: String,
                             contains value: String,
-                            caseInsensitive: Bool,
+                            caseInsensitive: Bool = false,
                             scopeNode: Node? = nil) -> NodeCollection {
         let rawCollection = attribute.withCString { attributeCStr in
             value.withCString { valueCStr in
@@ -82,9 +82,9 @@ public class Tree {
         }
     }
     
-    public func getChildNodesWhere(attribute: String,
+    public func getChildren(whereAttribute attribute: String,
                             beginsWith value: String,
-                            caseInsensitive: Bool,
+                            caseInsensitive: Bool = false,
                             scopeNode: Node? = nil) -> NodeCollection {
         let rawCollection = attribute.withCString { attributeCStr in
             value.withCString { valueCStr in
@@ -99,9 +99,9 @@ public class Tree {
         }
     }
     
-    public func getChildNodesWhere(attribute: String,
+    public func getChildren(whereAttribute attribute: String,
                             endsWith value: String,
-                            caseInsensitive: Bool,
+                            caseInsensitive: Bool = false,
                             scopeNode: Node? = nil) -> NodeCollection {
         let rawCollection = attribute.withCString { attributeCStr in
             value.withCString { valueCStr in
