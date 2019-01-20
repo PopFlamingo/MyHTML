@@ -22,7 +22,7 @@ public class NodeCollection: Collection {
     static let empty = NodeCollection(raw: nil)
     
     deinit {
-        myhtml_collection_destroy(raw)
+        assert(myhtml_collection_destroy(raw) == nil, "Unsuccessful destroy")
     }
     
     public var count: Int {
