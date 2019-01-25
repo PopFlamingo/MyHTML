@@ -142,6 +142,10 @@ final class MyHTMLTests: XCTestCase {
         let firstDiv = tree.children(whereAttribute: "id", contains: "firstDiv")[0]
         XCTAssertEqual(tree.children(whereAttribute: "class", contains: "bar").count, 3)
         XCTAssertEqual(tree.children(whereAttribute: "class", contains: "bar", scope: firstDiv).count, 2)
+        XCTAssertEqual(tree.children(whereAttribute: "class", beginsWith: "foo", caseInsensitive: false, scope: tree.headNode!).count, 0)
+        XCTAssertEqual(tree.children(whereAttribute: "class", beginsWith: "foo", caseInsensitive: false).count, 1)
+        XCTAssertEqual(tree.children(whereAttribute: "class", endsWith: "bar", caseInsensitive: false).count, 3)
+        XCTAssertEqual(tree.children(whereAttribute: "class", endsWith: "bar", caseInsensitive: false, scope: firstDiv).count, 2)
     }
     
     
