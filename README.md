@@ -17,7 +17,7 @@ Most non-mutating high level parsing functions are already warped, in other word
 ### macOS
 To install the MyHTML C library on your machine, cloning the [MyHTML **C repo**](https://github.com/lexborisov/myhtml) and following [the install instructions](https://github.com/lexborisov/myhtml/blob/master/INSTALL.md) should be enough.
 
-When using the MyHTML Swift warper library, if you are generating an Xcode project with Swift Package Manager, you must curently specify the `-Xcc -I/usr/local/include` and `-Xswiftc -I/usr/local/include` for *the Xcode project* to build, like this:
+When using the MyHTML Swift warper library, if you are generating an Xcode project with Swift Package Manager, you must curently specify the `-Xcc -I/usr/local/include` and `-Xswiftc -I/usr/local/include` options for *the Xcode project* to build, like this:
 ```bash
 swift package -Xcc -I/usr/local/include -Xswiftc -I/usr/local/include generate-xcodeproj
 ```
