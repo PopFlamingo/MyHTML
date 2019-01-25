@@ -164,7 +164,7 @@ final class MyHTMLTests: XCTestCase {
         ("testRightTimeContextDeinit", testRightTimeContextDeinit),
         ("testNodeParentGetter", testNodeParentGetter),
         ("testRightTimeTreeDeinit", testRightTimeTreeDeinit),
-        // ("testScopeNode", testScopeNode),
+        ("testScopeNode", testScopeNode),
         ("testNodeId", testNodeId)
     ]
     
