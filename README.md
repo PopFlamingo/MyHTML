@@ -11,3 +11,6 @@ This library has continuous integration, the master branch is protected and the 
 
 ### Dev branch
 [![CircleCI](https://circleci.com/gh/adtrevor/MyHTML/tree/dev.svg?style=svg&circle-token=3808acb78aad3d4ac2be1cca928ca498b2447673)](https://circleci.com/gh/adtrevor/MyHTML/tree/dev)
+
+## Installation
+TBD
