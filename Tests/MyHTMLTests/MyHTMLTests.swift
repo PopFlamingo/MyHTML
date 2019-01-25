@@ -136,14 +136,18 @@ final class MyHTMLTests: XCTestCase {
         }
     }
     
-    /*
+    
     func testScopeNode() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeB)
         let firstDiv = tree.children(whereAttribute: "id", contains: "firstDiv")[0]
         XCTAssertEqual(tree.children(whereAttribute: "class", contains: "bar").count, 3)
         XCTAssertEqual(tree.children(whereAttribute: "class", contains: "bar", scope: firstDiv).count, 2)
+        XCTAssertEqual(tree.children(whereAttribute: "class", beginsWith: "foo", caseInsensitive: false, scope: tree.headNode!).count, 0)
+        XCTAssertEqual(tree.children(whereAttribute: "class", beginsWith: "foo", caseInsensitive: false).count, 1)
+        XCTAssertEqual(tree.children(whereAttribute: "class", endsWith: "bar", caseInsensitive: false).count, 3)
+        XCTAssertEqual(tree.children(whereAttribute: "class", endsWith: "bar", caseInsensitive: false, scope: firstDiv).count, 2)
     }
-    */
+    
     
     func testNodeId() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
@@ -164,7 +168,7 @@ final class MyHTMLTests: XCTestCase {
         ("testRightTimeContextDeinit", testRightTimeContextDeinit),
         ("testNodeParentGetter", testNodeParentGetter),
         ("testRightTimeTreeDeinit", testRightTimeTreeDeinit),
-        // ("testScopeNode", testScopeNode),
+        ("testScopeNode", testScopeNode),
         ("testNodeId", testNodeId)
     ]
     
