@@ -136,14 +136,14 @@ final class MyHTMLTests: XCTestCase {
         }
     }
     
-    /*
+    
     func testScopeNode() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeB)
         let firstDiv = tree.children(whereAttribute: "id", contains: "firstDiv")[0]
         XCTAssertEqual(tree.children(whereAttribute: "class", contains: "bar").count, 3)
         XCTAssertEqual(tree.children(whereAttribute: "class", contains: "bar", scope: firstDiv).count, 2)
     }
-    */
+    
     
     func testNodeId() throws {
         let tree = try Tree(context: myHTML, html: sampleCodeA)
