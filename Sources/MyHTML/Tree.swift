@@ -77,12 +77,11 @@ public class Tree {
     
     public func children(whereAttribute attribute: String,
                             contains value: String,
-                            caseInsensitive: Bool = false,
-                            scope: Node? = nil) -> Node.Collection {
+                            caseInsensitive: Bool = false) -> Node.Collection {
         let rawCollection = attribute.withCString { attributeCStr in
             value.withCString { valueCStr in
                 myhtml_get_nodes_by_attribute_value_contain(
-                    rawTree,nil, scope?.rawNode, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
+                    rawTree,nil, nil, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
             }
         }
         if let rawCollection = rawCollection {
@@ -94,12 +93,11 @@ public class Tree {
     
     public func children(whereAttribute attribute: String,
                             beginsWith value: String,
-                            caseInsensitive: Bool = false,
-                            scope: Node? = nil) -> Node.Collection {
+                            caseInsensitive: Bool = false) -> Node.Collection {
         let rawCollection = attribute.withCString { attributeCStr in
             value.withCString { valueCStr in
                 myhtml_get_nodes_by_attribute_value_begin(
-                    rawTree,nil, scope?.rawNode, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
+                    rawTree,nil, nil, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
             }
         }
         if let rawCollection = rawCollection {
@@ -111,12 +109,11 @@ public class Tree {
     
     public func children(whereAttribute attribute: String,
                             endsWith value: String,
-                            caseInsensitive: Bool = false,
-                            scope: Node? = nil) -> Node.Collection {
+                            caseInsensitive: Bool = false) -> Node.Collection {
         let rawCollection = attribute.withCString { attributeCStr in
             value.withCString { valueCStr in
                 myhtml_get_nodes_by_attribute_value_end(
-                    rawTree,nil, scope?.rawNode, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
+                    rawTree,nil, nil, caseInsensitive, attributeCStr, attribute.utf8.count, valueCStr, value.utf8.count, nil)
             }
         }
         if let rawCollection = rawCollection {
