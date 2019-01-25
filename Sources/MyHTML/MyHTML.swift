@@ -1,16 +1,16 @@
 import CMyHTML
 
-class MyHTML {
+public class MyHTML {
     
-    var raw: OpaquePointer
+    var rawMyHTML: OpaquePointer
     
-    init(options: Options,
-         threadCount: Int,
-         queueSize: Int = 4096) throws {
+    public init(options: Options,
+                threadCount: Int,
+                queueSize: Int = 4096) throws {
         guard let raw = myhtml_create() else {
             throw Error.cannotCreateBaseStructure
         }
-        self.raw = raw
+        self.rawMyHTML = raw
         
         
         let status = myhtml_init(raw, myhtml_options(rawValue: options.rawValue), threadCount, queueSize)
@@ -21,13 +21,17 @@ class MyHTML {
         
     }
     
-    deinit {
-        myhtml_destroy(raw)
+    init(rawMyHTML: OpaquePointer) {
+        self.rawMyHTML = rawMyHTML
     }
     
-
-    enum Options: RawRepresentable {
-        init?(rawValue: UInt32) {
+    deinit {
+        assert(myhtml_destroy(rawMyHTML) == nil, "Unsuccessful destroy")
+    }
+    
+    
+    public enum Options: RawRepresentable {
+        public init?(rawValue: UInt32) {
             switch rawValue {
             case MyHTML_OPTIONS_PARSE_MODE_SEPARATELY.rawValue:
                 self = .separately
@@ -42,7 +46,7 @@ class MyHTML {
             }
         }
         
-        var rawValue: UInt32 {
+        public var rawValue: UInt32 {
             switch self {
             case .separately:
                 return MyHTML_OPTIONS_PARSE_MODE_SEPARATELY.rawValue

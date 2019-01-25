@@ -1,6 +1,6 @@
 import CMyHTML
 
-enum Error: Swift.Error {
+public enum Error: Swift.Error {
     case cannotCreateBaseStructure
     case statusError(rawValue: UInt32)
 }
