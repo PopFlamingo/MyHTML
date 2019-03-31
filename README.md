@@ -27,7 +27,6 @@ make install prefix="/usr"
 ```
 
 ### Additional installation notes
-- Once you followed the install instructions, you can use this library as any other Swift Package Manager library, just don't forget to include the correct flags if you are using Xcode, as described in the *Installation > macOS* section of this document.
 - Additional installation details and options are documented in the [C project install instructions](https://github.com/lexborisov/myhtml/blob/master/INSTALL.md)
 
 ## License notes
