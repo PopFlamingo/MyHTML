@@ -30,4 +30,4 @@ make install prefix="/usr"
 - Additional installation details and options are documented in the [C project install instructions](https://github.com/lexborisov/myhtml/blob/master/INSTALL.md)
 
 ## License notes
-This Swift warper is distributed under the *Apache License 2.0*, note that this license only concerns the Swift warper. The [MyHTML C library](https://github.com/lexborisov/myhtml) is distributed under it's own license.
+This Swift wrapper is distributed under the *Apache License 2.0*, note that this license only concerns the Swift wrapper. The [MyHTML C library](https://github.com/lexborisov/myhtml) is distributed under it's own license.
